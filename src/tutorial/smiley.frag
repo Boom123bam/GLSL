@@ -1,3 +1,16 @@
+precision mediump float;
+
+uniform vec2 u_resolution;
+uniform float u_time;
+uniform vec2 u_mouse;
+
+#define fragCoord gl_FragCoord.xy
+#define iResolution u_resolution
+#define iTime u_time
+#define fragColor gl_FragColor
+#define iMouse vec4(u_mouse,0.,0.)
+
+
 #define S(a,b,c) smoothstep(a,b,c)
 #define faceCol vec3(.9, .6, 0)
 vec3 face(vec2 uv){
@@ -132,13 +145,12 @@ vec3 smiley(vec2 uv, vec2 m, float smile){
 }
 
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
-{
+void main(){
     vec2 uv = fragCoord/iResolution.xy;
     uv -= .5;
     uv.x *= iResolution.x/iResolution.y;
     
-    float smile = .5 - .5 * cos(iTime);
+    float smile = iMouse.z;
     
     vec2 m = iMouse.xy/iResolution.xy;
     

@@ -1,6 +1,31 @@
+/*
+############################################
+########## Porting from ShaderToy ##########
+############################################
+*/
+
+precision mediump float;
+
+uniform vec2 u_resolution;
+uniform float u_time;
+uniform vec2 u_mouse;
+
+#define fragCoord gl_FragCoord.xy
+#define iResolution u_resolution
+#define iTime u_time
+#define fragColor gl_FragColor
+#define iMouse vec4(u_mouse,0.,0.)
+
+/*
+############################################
+############# Starter Template #############
+############################################
+*/
+
 #define PI 3.14159265359
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+// void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void main()
 {
     vec2 uv = fragCoord/iResolution.xy;
     //vec2 uv = fragCoord/iResolution.y;
@@ -10,3 +35,4 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     fragColor = vec4(col,1.0);
 }
+

@@ -1,3 +1,15 @@
+precision mediump float;
+
+uniform vec2 u_resolution;
+uniform float u_time;
+uniform vec2 u_mouse;
+
+#define fragCoord gl_FragCoord.xy
+#define iResolution u_resolution
+#define iTime u_time
+#define fragColor gl_FragColor
+#define iMouse vec4(u_mouse,0.,0.)
+
 vec2 rand2(vec2 st){
     st = vec2( dot(st,vec2(122.1,311.7)),
               dot(st,vec2(269.5,183.3)) );
@@ -40,8 +52,7 @@ float noise(float x){
 }
 
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
-{
+void main(){
     // Normalized pixel coordinates (from 0 to 1)
     vec2 uv = fragCoord/iResolution.y;
     uv *= 5.;
