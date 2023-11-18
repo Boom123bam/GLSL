@@ -90,15 +90,18 @@ float simplex3d(vec3 p) {
 void main()
 {
     vec2 uv = fragCoord/iResolution.y;
-    uv *= 10.;
+    uv *= 8.;
 
-    vec3 col1 = vec3(0.349, 0.4392, 0.851);
-    vec3 col2 = vec3(0.7373, 0.7647, 0.8784);
-    vec3 col = vec3(mix(col1,col2,simplex3d(vec3(floor(uv), iTime*.4))));
+    vec3 col1 = vec3(0.404,0.067,0.475);
+    vec3 col2 = vec3(0.106,0.043,0.157);
+    vec3 col = vec3(mix(col1,col2,simplex3d(vec3(floor(uv)/3., iTime*.2))));
+
+    vec3 lineCol = col + vec3(0.1);
+    vec3 cornerCol = vec3(0.835,0.502,0.902);
     
     vec2 centDist = abs(fract(uv)-.5);
-    col *= step(max(centDist.x, centDist.y), 0.48);
-    col *= step(length(centDist), 0.65);
+    col = mix(lineCol, col, step(max(centDist.x, centDist.y), 0.494));
+    col = mix(cornerCol, col, step(length(centDist), 0.69));
 
     fragColor = vec4(col,1.0);
 }
