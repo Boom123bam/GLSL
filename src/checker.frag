@@ -2,13 +2,11 @@ precision mediump float;
 
 uniform vec2 u_resolution;
 uniform float u_time;
-uniform vec2 u_mouse;
 
 #define fragCoord gl_FragCoord.xy
 #define iResolution u_resolution
 #define iTime u_time
 #define fragColor gl_FragColor
-#define iMouse vec4(u_mouse,0.,0.)
 
 #define PI 3.14159265359
 
@@ -30,7 +28,7 @@ void main(){
 
     vec3 col = vec3(f);
     
-    col *= min(1.,length(p));
+    col *= r;
     
     // output: pixel color
     fragColor = vec4( col, 1. );
