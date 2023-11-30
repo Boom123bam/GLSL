@@ -23,16 +23,17 @@ uniform vec2 u_mouse;
 */
 
 #define PI 3.14159265359
+#define S(a,b,c) smoothstep(a,b,c)
 
 // void mainImage( out vec4 fragColor, in vec2 fragCoord )
 void main()
 {
-    vec2 uv = fragCoord/iResolution.xy;
-    //vec2 uv = fragCoord/iResolution.y;
-    //vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
+  vec2 uv = fragCoord/iResolution.xy;
+  //vec2 uv = fragCoord/iResolution.y;
+  //vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
 
-    vec3 col = vec3(uv, 0.);
+  vec3 col = vec3(uv, 0.);
 
-    fragColor = vec4(col,1.0);
+  fragColor = vec4(col,1.0);
 }
 
