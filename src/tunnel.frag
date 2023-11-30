@@ -40,8 +40,9 @@ mat2 rot(float ang){
 }
 
 float line(float ang, float thickness){
-  float col = S(-thickness, thickness, ang + .01 );
-  col *= S(thickness, -thickness, ang - .01 );
+  float col = S(-thickness, thickness, ang + .01 )
+  * S(thickness, -thickness, ang - .01 );
+
   return col;
 }
 
@@ -62,17 +63,21 @@ void main()
   float ang = atan(uv.x, uv.y);
   float d = length(uv);
 
+  float t = iTime;
+
   vec3 col;
 
   float recD = 1./d;
 
-  vec3 lineCol = hsl2rgb(vec3(recD * 5. + iTime, 1, 0.9));
+  vec3 lineCol = hsl2rgb(vec3(recD * 5. + t, 1, 0.8));
 
   for (float i = 0.; i < SECTIONS; i++){
     uv *= rot(2. * PI / SECTIONS);
     ang = atan(uv.x, uv.y) + sin(recD) * 2.;
-    col += line(ang + wave(recD * 3., iTime) * .7, .01 * recD) * lineCol;
-    col += line(-ang + wave(recD * 3., iTime) * .7, .01 * recD) * lineCol;
+    col += line(ang + wave(recD * 3., t) * .7, .01 * recD) * lineCol * 1.5;
+    col += line(ang + wave(recD * 3., t) * .7, .6 * recD) * lineCol;
+    col += line(-ang + wave(recD * 3., t) * .7, .01 * recD) * lineCol * 1.5;
+    col += line(-ang + wave(recD * 3., t) * .7, .6 * recD) * lineCol;
   }
 
   col *= S(0., 2. , d - 1.);

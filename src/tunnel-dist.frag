@@ -69,7 +69,7 @@ void main()
 
   float recD = 1./d;
 
-  vec3 lineCol = hsl2rgb(vec3(recD * 5. + dist, 1, 0.9));
+  vec3 lineCol = hsl2rgb(vec3(recD * 5. + dist, 1, 0.8));
 
   vec2 newUv;
   
@@ -77,10 +77,10 @@ void main()
   for (float i = 0.; i < SECTIONS; i++){
     newUv = uv * rot(2. * PI / SECTIONS * i - dist);
     ang = atan(newUv.x, newUv.y);
-    glowLineThickness = (.75 - glow)  * recD;
-    col += line(ang + wave(recD * 3., dist, iTime) * .7, glowLineThickness ) * lineCol;
+    glowLineThickness = (1. - glow) * .75  * recD;
+    col += line(ang + wave(recD * 3., dist, iTime) * .7, glowLineThickness ) * lineCol * 1.5;
     col += line(ang + wave(recD * 3., dist, iTime) * .7, .05 * recD) * lineCol;
-    col += line(-ang + wave(recD * 3., dist, iTime) * .7, glowLineThickness ) * lineCol;
+    col += line(-ang + wave(recD * 3., dist, iTime) * .7, glowLineThickness ) * lineCol * 1.5;
     col += line(-ang + wave(recD * 3., dist, iTime) * .7, .05 * recD) * lineCol;
   }
 
